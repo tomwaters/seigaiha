@@ -53,14 +53,15 @@ end
 
 function redraw()
   radius = 10
+  margin = 2
   screen.clear()  
   screen.aa(1)
   
   for b = 0, max - 1 do
     if bows[b] ~= nil then
-      x = (b % 6 * ((radius * 2) + 1)) + 2
-      y = ((math.floor(b / 6) + 1) * (radius - 1) + 2)
-      
+      x = (b % 6 * ((radius * 2) + 1)) + margin
+      y = ((math.floor(b / 6) + 1) * (radius - 1) + margin)
+
       if y % 2 > 0 then x = x - radius - 1 end
       
       -- loop for first rainbow on alt rows that repeats at start and end of row
