@@ -9,7 +9,7 @@ max = 36
 root_note = 43
 
 function init()
-  engine.release(3)
+  engine.release(4)
   engine.pw(0.6)
   clock.run(step)
 end
@@ -38,16 +38,15 @@ function step()
     chord_idx = math.random(#scale.chords[1])
     chord = MusicUtil.CHORDS[scale.chords[1][chord_idx]]
     chord_root = root_note + scale.intervals[math.random(#scale.intervals)]
+    clock.sync(8)
     for i=1, #chord.intervals do
-      clock.sync(0.5)
       freq = MusicUtil.note_num_to_freq(chord_root + chord.intervals[i])
       engine.hz(freq)
       
       bows[bow] = bows[bow] + (1 / #chord.intervals)
       redraw()
+      clock.sync(0.5)      
     end
-    
-    clock.sync(4)
   end
 end
 
