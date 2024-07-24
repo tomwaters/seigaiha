@@ -2,7 +2,7 @@
 A simple norns script that plays arpeggios while drawing a seigaiha pattern on the screen.
 
 ### recommended listening
-Set the clock to between 80 and 120 bpm, add some reverb and maybe play a field recording in the norns tape.
+Set the clock to between 80 and 120 bpm, add some reverb and maybe play a field recording in the norns tape player.
 
 ### how it works
 The step function uses the MusicUtil library to select a chord at random from the pentatonic scale with a random root note. It then waits until the next sync quantum of 4 beats before it plays the notes in that chord using the polyperc engine with a half beat pause between each note. The process is then repeated with a new chord played each time.
@@ -18,3 +18,4 @@ The following are a few suggestions to add functionality to the script. The awak
 - add some softcut effects like the awake halfsecond delay
 - output midi or crow, switch in a different engine or write your own
 - draw a different pattern by exploring the screen library - lines, circles, the world is your geometric oyster
+- use the lfo library to modulate engine options

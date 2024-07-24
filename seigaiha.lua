@@ -14,10 +14,6 @@ function init()
   clock.run(step)
 end
 
-function update()
-  redraw()
-end
-
 function step()
   while true do
     -- if screen is full, restart
@@ -43,6 +39,7 @@ function step()
       freq = MusicUtil.note_num_to_freq(chord_root + chord.intervals[i])
       engine.hz(freq)
       
+      -- set the progress through this chord/rainbow
       bows[bow] = bows[bow] + (1 / #chord.intervals)
       redraw()
       clock.sync(0.5)      
@@ -56,11 +53,14 @@ function redraw()
   screen.clear()  
   screen.aa(1)
   
+  -- draw any played ranbows
   for b = 0, max - 1 do
     if bows[b] ~= nil then
+      -- calc x/y start for this rainbow
       x = (b % 6 * ((radius * 2) + 1)) + margin
       y = ((math.floor(b / 6) + 1) * (radius - 1) + margin)
-
+      
+      -- offset every other row
       if y % 2 > 0 then x = x - radius - 1 end
       
       -- loop for first rainbow on alt rows that repeats at start and end of row
@@ -70,6 +70,7 @@ function redraw()
           screen.arc(x + radius, y, radius - (i * 2), math.pi, math.pi + (math.pi * bows[b]))
           screen.stroke()
         end
+        -- if we're drawing half a rainbow on the left edge, do the other half on the right
         if x < 0 then x = 128 - radius else break end
       end
     end
